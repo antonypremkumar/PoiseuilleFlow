@@ -1,4 +1,5 @@
 #include<iostream>
+#include<fstream>
 #include<cmath>
 #include<memory>
 
@@ -24,7 +25,7 @@ int main()
   float y, y2;
   float c1, c2;
   float l2;
-  FILE *out, *data;
+  std::ofstream out;
 
   visc = (tau - 0.5)/3.0;
 
@@ -178,8 +179,8 @@ int main()
       }
     }
 
-    out = fopen("ux_prof.dat", "w");
-    fprintf(out, "nx-1, j, ux, ux_exact, uy, rho\n");
+    out.open("ux_prof.csv");
+    out << "nx-1,j,ux,ux_exact,uy,rho" << std::endl;
     i = nx-1;
     l2 = 0.0; c1 = 0.0; c2 = 0.0;
     for( j=0; j<ny; j++ )
@@ -198,12 +199,12 @@ int main()
       }
       c1 += ux_exact[j] * ux_exact[j];
       c2 += (ux_exact[j] - ux) * (ux_exact[j] - ux);
-      fprintf(out, "%d,%d,%12.8f,%12.8f,%12.8f,%12.8f\n", nx-1, j, ux, ux_exact[j], uy, rho);
+      out << nx-1 << "," << j << "," << ux << "," << ux_exact[j] << "," << uy << "," << rho << std::endl;
     }
     printf("c1 = %12.8e c2 = %12.8e\n", c1, c2);
     l2 = pow((c2/c1), 0.5);
     printf("l2 = %12.8e\n", l2);
-    fclose(out);
+    out.close();
   }
 
   
