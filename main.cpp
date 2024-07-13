@@ -2,6 +2,63 @@
 #include<fstream>
 #include<cmath>
 #include<memory>
+#include<vector>
+
+struct Domain
+{
+  // Number of points in the X direction
+  int nX = 201;
+  // Number of points in the Y direction
+  int nY = 21;
+  float delta = 0.5;
+};
+
+class D2Q9
+{
+  public:
+  int directions = 9;
+  int ex[9], ey[9];
+  float wt[9];
+
+  D2Q9()
+  {
+    ex[0] =  0; ey[0] =  0;
+    ex[1] =  1; ey[1] =  0;
+    ex[2] =  0; ey[2] =  1;
+    ex[3] = -1; ey[3] =  0;
+    ex[4] =  0; ey[4] = -1;
+    ex[5] =  1; ey[5] =  1;
+    ex[6] = -1; ey[6] =  1;
+    ex[7] = -1; ey[7] = -1;
+    ex[8] =  1; ey[8] = -1;
+
+    wt[0] = 4.0/9.0;
+    wt[1] = 1.0/9.0;
+    wt[2] = 1.0/9.0;
+    wt[3] = 1.0/9.0;
+    wt[4] = 1.0/9.0;
+    wt[5] = 1.0/36.0;
+    wt[6] = 1.0/36.0;
+    wt[7] = 1.0/36.0;
+    wt[8] = 1.0/36.0;
+  }
+};
+
+class LBM
+{
+  //std::vector<std::vector<std::vector<double>>> f
+  //(
+  //  Domain::nX,
+  //  std::vector<std::vector<double>>
+  //  (
+  //    Domain::nY,
+  //    std::vector<double>
+  //    (
+  //      D2Q9::directions
+  //    )
+  //  )
+  //); 
+};
 
 int main()
 {
